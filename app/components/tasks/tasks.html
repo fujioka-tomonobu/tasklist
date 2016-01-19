@@ -1,0 +1,55 @@
+
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab"  ng-click="tasks.setFilter()">全　て</a></li>
+  <li><a data-toggle="tab" ng-click="tasks.setFilter('大川')">大　川</a></li>
+  <li><a data-toggle="tab" ng-click="tasks.setFilter('藤岡')">藤　岡</a></li>
+  <li><a data-toggle="tab" ng-click="tasks.setFilter('青屋')">青　屋</a></li>
+</ul>
+
+<table class="table table-striped">
+    <tr ng-repeat="task in tasks.items | filter: tasks.ownerFileter">
+      <td>
+        <select id="task.owner" ng-model="task.owner" ng-change="tasks.items.$save(task)">
+          <option ng-repeat="owner in tasks.owners">{{owner}}</option>
+        </select>
+      </td>
+      <td>
+        <select id="task.progress" ng-model="task.progress" ng-change="tasks.items.$save(task)">
+          <option ng-repeat="progress in tasks.progresses">{{progress}}</option>
+        </select>
+        <div class="progress progress-striped">
+          <div class="progress-bar progress-bar-info" style="width: {{task.progress}};"></div>
+        </div>
+      </td>
+      <td>{{task.note}}</td>
+      <td>
+        <button type="button" class="btn btn-danger" ng-click="tasks.removeTask(task)">
+          削除
+        </button>
+      </td>
+    </tr>
+</table>
+
+<hr>
+
+<form class="form-horizontal" name="tasksregister" ng-submit="tasks.register()" novalidate>
+  <div class="form-group">
+    <label for="owner" class="col-sm-2 control-label">担当者</label>
+    <div class="col-sm-10">
+      <select id="owner" ng-model="tasks.owner" required>
+        <option ng-repeat="owner in tasks.owners">{{owner}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="note" class="col-sm-2 control-label">タスク</label>
+    <div class="col-sm-10">
+      <input type="text" class="form-control" id="note" ng-model="tasks.note" required>
+    </div>
+  </div>
+  <div class="form-group">
+    <div class="col-sm-10">
+      <input class="btn btn-primary" type="submit" value="作成する" ng-disabled="!tasksregister.$valid">
+    </div>
+  </div>
+</form>
