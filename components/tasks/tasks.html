@@ -23,7 +23,7 @@
         </select>
       </td>
       <td>
-        <select id="task.progress" ng-model="task.progress" ng-change="tasks.changeProgress(task)">
+        <select id="task.progress" ng-model="task.progress" ng-change="tasks.items.$save(task)">
           <option ng-repeat="progress in tasks.progresses">{{progress}}</option>
         </select>
         <div class="progress progress-striped">
