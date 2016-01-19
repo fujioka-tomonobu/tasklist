@@ -1,4 +1,3 @@
-
 <ul class="nav nav-tabs">
   <li class="active"><a data-toggle="tab"  ng-click="tasks.setFilter()">全　て</a></li>
   <li><a data-toggle="tab" ng-click="tasks.setFilter('大川')">大　川</a></li>
@@ -14,11 +13,11 @@
         </select>
       </td>
       <td>
-        <select id="task.progress" ng-model="task.progress" ng-change="tasks.items.$save(task)">
+        <select id="task.progress" ng-model="task.progress" ng-change="tasks.changeProgress(task)">
           <option ng-repeat="progress in tasks.progresses">{{progress}}</option>
         </select>
         <div class="progress progress-striped">
-          <div class="progress-bar progress-bar-info" style="width: {{task.progress}};"></div>
+          <div class="progress-bar {{task.progress == '100%' ? 'progress-bar-info' : 'progress-bar-danger'}}" style="width: {{task.progress}};"></div>
         </div>
       </td>
       <td>{{task.note}}</td>
