@@ -1,6 +1,7 @@
 <div>
   開発入る前、必ず
   <ul>
+    <li>git pull</li>
     <li>npm install</li>
     <li>bower install</li>
   </ul>
@@ -22,7 +23,7 @@
         </select>
       </td>
       <td>
-        <select id="task.progress" ng-model="task.progress" ng-change="tasks.changeProgress(task)">
+        <select id="task.progress" ng-model="task.progress" ng-change="tasks.items.$save(task)">
           <option ng-repeat="progress in tasks.progresses">{{progress}}</option>
         </select>
         <div class="progress progress-striped">
