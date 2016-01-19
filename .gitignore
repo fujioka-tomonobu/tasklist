@@ -1,6 +1,7 @@
 node_modules
 dist
 .tmp
+.grunt
 bower_components
 docs
 report
