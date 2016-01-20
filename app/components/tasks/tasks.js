@@ -42,7 +42,9 @@
     var tasks = vm.TasksService.getTasks();
     vm.items = tasks;
     vm.completeFileter = {progress : '!100%'};
-    vm.nowOwner = '全て';
+    vm.items.$loaded().then(vm.setCount);
+    vm.items.$watch(vm.setCount);
+    vm.all = false;
   };
 
   TasksController.prototype.register = function() {
@@ -66,24 +68,56 @@
     }
   };
 
-  TasksController.prototype.changeComplete = function(owner) {
-    var before = vm.complete;
-    if (vm.complete) {
-      vm.completeFileter = {progress : '!100%'};
-    } else {
-      vm.completeFileter = undefined;
+  TasksController.prototype.setCount = function() {
+
+    vm.allcount = 0;
+    vm.okawacount = 0;
+    vm.fujiokacount = 0;
+    vm.aoyacount = 0;
+
+    for (var i = 0; i < vm.items.length; i++) {
+      var item = vm.items[i];
+
+      if (vm.all) {
+        vm.allcount++;
+      } else {
+        if (item.progress !== '100%') {
+          vm.allcount++;
+        }
+      }
+
+      if (item.owner === '大川') {
+        if (vm.all) {
+          vm.okawacount++;
+        } else {
+          if (item.progress !== '100%') {
+            vm.okawacount++;
+          }
+        }
+      }
+
+      if (item.owner === '藤岡') {
+        if (vm.all) {
+          vm.fujiokacount++;
+        } else {
+          if (item.progress !== '100%') {
+            vm.fujiokacount++;
+          }
+        }
+      }
+
+      if (item.owner === '青屋') {
+        if (vm.all) {
+          vm.aoyacount++;
+        } else {
+          if (item.progress !== '100%') {
+            vm.aoyacount++;
+          }
+        }
+      }
     }
 
-    vm.complete = !before;
-  };
-
-  TasksController.prototype.setFilter = function(owner) {
-    if (owner && owner !== '全て') {
-      vm.ownerFileter = {owner : owner};
-    } else {
-      vm.ownerFileter = undefined;
-    }
-  };
+  }
 
   /**
    * Angular ViewModel
