@@ -1,8 +1,8 @@
 node_modules
 dist
 .tmp
-.grunt
 bower_components
 docs
 report
 npm-debug.log
+.grunt
