@@ -41,6 +41,8 @@
 
     var tasks = vm.TasksService.getTasks();
     vm.items = tasks;
+    vm.completeFileter = {progress : '!100%'};
+    vm.nowOwner = '全て';
   };
 
   TasksController.prototype.register = function() {
@@ -64,8 +66,19 @@
     }
   };
 
+  TasksController.prototype.changeComplete = function(owner) {
+    var before = vm.complete;
+    if (vm.complete) {
+      vm.completeFileter = {progress : '!100%'};
+    } else {
+      vm.completeFileter = undefined;
+    }
+
+    vm.complete = !before;
+  };
+
   TasksController.prototype.setFilter = function(owner) {
-    if (owner) {
+    if (owner && owner !== '全て') {
       vm.ownerFileter = {owner : owner};
     } else {
       vm.ownerFileter = undefined;
