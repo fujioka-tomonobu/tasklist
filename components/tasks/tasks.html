@@ -1,25 +1,36 @@
-<div>
-  開発入る前、必ず
-  <ul>
-    <li>git pull</li>
-    <li>npm install</li>
-    <li>bower install</li>
-  </ul>
-をやってから始めてね！ 必要に応じてモジュール追加してるよ！！
-<div>
-
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
-<hr>
+
+<div style="padding-bottom:5px">
+  <span ng-click="
+    tasks.all ? tasks.completeFileter = {progress : '!100%'} : tasks.completeFileter = undefined;
+    tasks.all=!tasks.all;
+    tasks.setCount()">
+    <input type="checkbox" data-toggle="toggle" data-off="未完了" data-on="全て" data-onstyle="info" data-offstyle="danger">
+  </span>
+</div>
 
 <div>
-  <ul class="nav nav-tabs">
-    <li ng-click="tasks.changeComplete()">
-      <input type="checkbox" data-toggle="toggle" data-off="未完了" data-on="全て" data-onstyle="info" data-offstyle="danger">　　
+  <ul class="nav nav-pills">
+    <li class="active">
+      <a data-toggle="tab" ng-click="tasks.ownerFileter = undefined">
+        全　て  <span class="badge">{{tasks.allcount ? tasks.allcount : 0 }}</span>
+      </a>
     </li>
-    <li class="active"><a data-toggle="tab"  ng-click="tasks.setFilter('全て')">全　て</a></li>
-    <li><a data-toggle="tab" ng-click="tasks.setFilter('大川')">大　川</a></li>
-    <li><a data-toggle="tab" ng-click="tasks.setFilter('藤岡')">藤　岡</a></li>
-    <li><a data-toggle="tab" ng-click="tasks.setFilter('青屋')">青　屋</a></li>
+    <li>
+      <a data-toggle="tab" ng-click="tasks.ownerFileter = {owner : '大川'}">
+        大　川  <span class="badge">{{tasks.okawacount ? tasks.okawacount : 0 }}</span>
+      </a>
+    </li>
+    <li>
+      <a data-toggle="tab" ng-click="tasks.ownerFileter = {owner : '藤岡'}">
+        藤　岡　<span class="badge">{{tasks.fujiokacount ? tasks.fujiokacount : 0 }}</span>
+      </a>
+    </li>
+    <li>
+      <a data-toggle="tab" ng-click="tasks.ownerFileter = {owner : '青屋'}">
+        青　屋　<span class="badge">{{tasks.aoyacount ? tasks.aoyacount : 0 }}</span>
+      </a>
+    </li>
   </ul>
 </div>
 
