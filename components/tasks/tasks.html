@@ -7,16 +7,24 @@
   </ul>
 をやってから始めてね！ 必要に応じてモジュール追加してるよ！！
 <div>
+
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js"></script>
 <hr>
-<ul class="nav nav-tabs">
-  <li class="active"><a data-toggle="tab"  ng-click="tasks.setFilter()">全　て</a></li>
-  <li><a data-toggle="tab" ng-click="tasks.setFilter('大川')">大　川</a></li>
-  <li><a data-toggle="tab" ng-click="tasks.setFilter('藤岡')">藤　岡</a></li>
-  <li><a data-toggle="tab" ng-click="tasks.setFilter('青屋')">青　屋</a></li>
-</ul>
+
+<div>
+  <ul class="nav nav-tabs">
+    <li ng-click="tasks.changeComplete()">
+      <input type="checkbox" data-toggle="toggle" data-off="未完了" data-on="全て" data-onstyle="info" data-offstyle="danger">　　
+    </li>
+    <li class="active"><a data-toggle="tab"  ng-click="tasks.setFilter('全て')">全　て</a></li>
+    <li><a data-toggle="tab" ng-click="tasks.setFilter('大川')">大　川</a></li>
+    <li><a data-toggle="tab" ng-click="tasks.setFilter('藤岡')">藤　岡</a></li>
+    <li><a data-toggle="tab" ng-click="tasks.setFilter('青屋')">青　屋</a></li>
+  </ul>
+</div>
 
 <table class="table table-striped">
-    <tr ng-repeat="task in tasks.items | filter: tasks.ownerFileter">
+    <tr ng-repeat="task in tasks.items | filter: tasks.ownerFileter | filter: tasks.completeFileter">
       <td>
         <select id="task.owner" ng-model="task.owner" ng-change="tasks.items.$save(task)">
           <option ng-repeat="owner in tasks.owners">{{owner}}</option>
