@@ -36,7 +36,6 @@
     vm = this;
 
     this.owners = ['大川' , '藤岡', '青屋'];
-
     this.progresses = ['0%', '20%', '40%', '60%', '80%', '100%'];
 
     var tasks = vm.TasksService.getTasks();
@@ -78,46 +77,22 @@
     for (var i = 0; i < vm.items.length; i++) {
       var item = vm.items[i];
 
-      if (vm.all) {
+      if (vm.all || (!vm.all && item.progress !== '100%')) {
         vm.allcount++;
-      } else {
-        if (item.progress !== '100%') {
-          vm.allcount++;
-        }
-      }
-
-      if (item.owner === '大川') {
-        if (vm.all) {
-          vm.okawacount++;
-        } else {
-          if (item.progress !== '100%') {
+        switch (item.owner) {
+          case '大川':
             vm.okawacount++;
-          }
-        }
-      }
-
-      if (item.owner === '藤岡') {
-        if (vm.all) {
-          vm.fujiokacount++;
-        } else {
-          if (item.progress !== '100%') {
+            break;
+          case '藤岡':
             vm.fujiokacount++;
-          }
-        }
-      }
-
-      if (item.owner === '青屋') {
-        if (vm.all) {
-          vm.aoyacount++;
-        } else {
-          if (item.progress !== '100%') {
+            break;
+          case '青屋':
             vm.aoyacount++;
-          }
+            break;
         }
       }
     }
-
-  }
+  };
 
   /**
    * Angular ViewModel
